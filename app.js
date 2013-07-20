@@ -1,6 +1,9 @@
 var http = require('http'),
   express = require('express'),
-  jade = require('jade');
+  jade = require('jade'),
+  AWS = require('aws-sdk');
+
+AWS.config.loadFromPath('config/aws.json');
 
 var routes = require('./routes');
 
