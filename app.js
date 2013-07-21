@@ -5,7 +5,8 @@ var http = require('http'),
 
 AWS.config.loadFromPath('config/aws.json');
 
-var routes = require('./routes');
+var routes = require('./routes'),
+  story_routes = require('./routes/story');
 
 var app = module.exports.app = express();
 
@@ -20,6 +21,8 @@ app.use(express.methodOverride());
 app.use(app.router);
 
 app.get('/', routes.index);
+app.get('/s', story_routes.index);
+app.get('/s/:id', story_routes.show);
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
