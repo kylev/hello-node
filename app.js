@@ -27,7 +27,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/s', story.index);
+app.get('/s', story.featured);
 app.get('/s/:id', story.show);
 
 http.createServer(app).listen(app.get('port'), function () {
