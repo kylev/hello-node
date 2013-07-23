@@ -1,6 +1,10 @@
 {
+  "node": true,
+
   "curly": true,
   "indent": 2,
   "trailing": true,
-  "white": true
+  "white": true,
+  "undef": true,
+  "unused": true
 }

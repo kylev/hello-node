@@ -1,4 +1,4 @@
-AWS = require('aws-sdk');
+var AWS = require('aws-sdk');
 
 exports.index = function (req, res) {
   res.setHeader('Content-Type', 'text/plain');
