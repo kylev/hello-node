@@ -5,9 +5,13 @@ html
     title #{title}
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/stylesheets/main.css')
+
   body
     .navbar.navbar-inverse.navbar-fixed-top
       .container
-        a.navbar-brand(href="/") Hello Node
+        a.navbar-brand(href='/') Hello Node
+        ul.nav.navbar-nav
+          li
+            a(href='/s') Stories
     .container
       block content
