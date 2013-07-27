@@ -6,6 +6,8 @@
   "dependencies": {
     "express": "3.x",
     "jade": "*",
+    "less-middleware": "*",
+    "bootstrap": "git+https://github.com/twitter/bootstrap.git#v3.0.0-rc1",
 
     "async": "*",
     "aws-sdk": "*",
