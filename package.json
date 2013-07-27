@@ -11,7 +11,8 @@
 
     "async": "*",
     "aws-sdk": "*",
-    "redis": "*"
+    "redis": "*",
+    "underscore": "*"
   },
   "devDependencies": {
     "jshint": "*"

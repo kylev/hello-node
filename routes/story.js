@@ -1,6 +1,7 @@
 var AWS = require('aws-sdk'),
   async = require('async'),
-  redis = require('redis');
+  redis = require('redis'),
+  u = require('underscore');
 
 // TODO This feels wrong.
 var rdb = redis.createClient();
@@ -10,7 +11,7 @@ exports.featured = function (req, res) {
   rdb.lrange("featured_stories", 0, 10, function (err, story_ids) {
     // TODO Should handle redis errors
     async.map(story_ids, findStory, function (err, story_list) {
-      res.render('story/featured', {story_list: story_list});
+      res.render('story/featured', {story_list: u.compact(story_list)});
     });
   });
 };
@@ -37,13 +38,18 @@ function findStory(story_id, cb) {
   var ddb = new AWS.DynamoDB();
 
   ddb.getItem({TableName: "Story", Key: key_desc}, function (err, data) {
-    var transformed = {};
-    var contents = data.Item;
+    if (u.isEmpty(data)) {
+      // Stale entry in the list, no related story
+      cb(null, null);
+    } else {
+      var transformed = {};
+      var contents = data.Item;
 
-    for (var key in contents) {
-      transformed[key] = contents[key].S;
+      for (var key in contents) {
+        transformed[key] = contents[key].S;
+      }
+
+      cb(err, transformed);
     }
-
-    cb(err, transformed);
   });
 }
