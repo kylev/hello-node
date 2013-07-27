@@ -18,7 +18,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-app.use(express.favicon());
+app.use(express.favicon('public/favicon.ico'));
 app.use('/img', express.static(path.join(bootstrapPath, 'img')));
 app.use(less({
     src    : path.join(__dirname, 'assets', 'less'),
