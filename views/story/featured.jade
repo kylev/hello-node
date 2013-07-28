@@ -3,5 +3,4 @@ extend ../layout
 block content
   ul
     each story in story_list
-      li
-        a(href="/s/#{story.id}") #{story.title}
+      li: a(href="/s/#{story.id}") #{story.title}
