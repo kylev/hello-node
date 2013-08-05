@@ -36,6 +36,12 @@ app.use(app.router);
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+} else {
+  /*jshint unused: false */
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('500', { error: err, title: 'An Error' });
+  });
 }
 
 app.use(function (req, res) {
@@ -53,12 +59,6 @@ app.use(function (req, res) {
 
   // default to plain-text. send()
   res.type('txt').send('Not found');
-});
-
-/*jshint unused: false */
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('500', { error: err, title: 'An Error' });
 });
 
 app.get('/', routes.index);
