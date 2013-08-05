@@ -16,14 +16,24 @@ exports.featured = function (req, res) {
   });
 };
 
-exports.show = function (req, res) {
+exports.show = function (req, res, next) {
   findStory(req.params.id, function (err, data) {
     if (err) {
-      console.log(err);
-    } else {
-      res.render('story/show', {story: data});
+      next(err);
+      return;
     }
+
+    if (data === null) {
+      next();
+      return;
+    }
+
+    res.render('story/show', {story: data});
   });
+};
+
+exports.new = function (req, res) {
+  res.render('story/new');
 };
 
 function findStory(story_id, cb) {
@@ -31,6 +41,11 @@ function findStory(story_id, cb) {
   var ddb = new AWS.DynamoDB();
 
   ddb.getItem({TableName: "Story", Key: key_desc}, function (err, data) {
+    if (err) {
+      cb(err, null);
+      return;
+    }
+
     if (u.isEmpty(data)) {
       // Stale entry in the list, no related story
       cb(null, null);
