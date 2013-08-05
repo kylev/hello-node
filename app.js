@@ -63,6 +63,8 @@ app.use(function (req, res) {
 
 app.get('/', routes.index);
 app.get('/s', story.featured);
+app.get('/s/new', story.newStory);
+app.post('/s/new', story.createStory);
 app.get('/s/:id', story.show);
 // app.get('/500', function (req, res, next) { next(new Error("Pants.")); });
 

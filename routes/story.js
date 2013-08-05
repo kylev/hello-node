@@ -32,8 +32,12 @@ exports.show = function (req, res, next) {
   });
 };
 
-exports.new = function (req, res) {
+exports.newStory = function (req, res) {
   res.render('story/new');
+};
+
+exports.createStory = function (req, res, next) {
+  next(new Error("Not Implemented"));
 };
 
 function findStory(story_id, cb) {

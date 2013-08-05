@@ -3,4 +3,8 @@ extend ../layout
 block content
   ul
     each story in story_list
-      li: a(href="/s/#{story.id}") #{story.title}
+      .media
+        .media-body
+          h4.media-heading: a(href="/s/#{story.id}") #{story.title}
+
+  p: a(href='/s/new') New
