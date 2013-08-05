@@ -38,9 +38,33 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.use(function (req, res) {
+  res.status(404);
+
+  if (req.accepts('html')) {
+    res.render('404', { url: req.url, title: 'Not Found' });
+    return;
+  }
+
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type('txt').send('Not found');
+});
+
+/*jshint unused: false */
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('500', { error: err, title: 'An Error' });
+});
+
 app.get('/', routes.index);
 app.get('/s', story.featured);
 app.get('/s/:id', story.show);
+// app.get('/500', function (req, res, next) { next(new Error("Pants.")); });
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
