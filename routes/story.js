@@ -1,7 +1,7 @@
 var AWS = require('aws-sdk'),
   async = require('async'),
   redis = require('redis'),
-  u = require('underscore');
+  u = require('lodash');
 
 // TODO This feels wrong.
 var rdb = redis.createClient();

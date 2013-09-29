@@ -7,12 +7,12 @@
     "express": "3.x",
     "jade": "*",
     "less-middleware": "*",
-    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v3.0.0-rc1",
+    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v3.0.0",
 
     "async": "*",
     "aws-sdk": "*",
     "redis": "*",
-    "underscore": "*"
+    "lodash": "*"
   },
   "devDependencies": {
     "jshint": "*"
