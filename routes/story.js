@@ -6,11 +6,16 @@ var AWS = require('aws-sdk'),
 // TODO This feels wrong.
 var rdb = redis.createClient();
 
-exports.featured = function (req, res) {
+exports.featured = function (req, res, next) {
 
   rdb.lrange("featured_stories", 0, 10, function (err, story_ids) {
     // TODO Should handle redis errors
     async.map(story_ids, findStory, function (err, story_list) {
+      if (err) {
+        next(err);
+        return;
+      }
+
       res.render('story/featured', {story_list: u.compact(story_list)});
     });
   });
